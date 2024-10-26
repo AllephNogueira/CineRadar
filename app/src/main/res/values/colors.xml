@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="preto">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="branco">#FFFFFFFF</color>
+    <color name="CorLetras">#FFFFFFFF</color>
+
+
+    <color name="barraStatus">#FF000000</color>
+    <color name="corFundo">#2e2e30</color>
+    <color name="corTextoEntrada">#f52a1a</color>
+
+
+    <color name="corPrimaria">#E70001</color>
+    <color name="primaria_variacao">#AA0407</color>
+    <color name="corSecundaria">#f70000</color>
+    <color name="fundo">#171417</color>
+    <color name="menu_nevegacao">@color/branco</color>
+
+
+
+    <color name="transparente">#00FFFFFF</color>
+
+</resources>
