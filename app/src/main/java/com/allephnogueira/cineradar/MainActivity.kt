@@ -1,10 +1,12 @@
 package com.allephnogueira.cineradar
 
 import FormatarData
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +33,7 @@ import java.time.format.DateTimeFormatter
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var itemClicado: String
 
     /** Configuraçao inicial do meu RecyclerView */
 
@@ -163,8 +166,12 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = Adapter(events) { events ->
             Toast.makeText(this, events, Toast.LENGTH_SHORT).show()
+            itemClicado = events
+            Log.d("MainActivity", "ID do item clicado foi $itemClicado")
         }
     }
+
+
 
 
 }

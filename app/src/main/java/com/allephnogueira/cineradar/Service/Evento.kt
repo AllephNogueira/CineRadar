@@ -8,6 +8,7 @@ data class Event(
     val id: String,
     val title: String,
     val date: String,
+    val synopsis: String,
     val images: List<Image>,
     val genres: List<String>,
     val premiereDate: PremiereDate
