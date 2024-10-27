@@ -18,13 +18,13 @@
         android:theme="@style/Theme.CineRadar"
         tools:targetApi="31">
         <activity
-            android:name=".MovieDetailActivity"
+            android:name=".View.DetalhesFilmesActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".splash.SplashAcitivity"
+            android:name=".View.SplashAcitivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

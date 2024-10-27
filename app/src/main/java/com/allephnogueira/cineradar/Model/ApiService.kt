@@ -1,4 +1,5 @@
-package com.allephnogueira.cineradar.Service
+package com.allephnogueira.cineradar.Model
+import com.allephnogueira.cineradar.ViewModel.EventResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

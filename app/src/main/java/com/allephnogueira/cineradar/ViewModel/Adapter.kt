@@ -1,4 +1,4 @@
-package com.allephnogueira.cineradar.Adapter
+package com.allephnogueira.cineradar.ViewModel
 
 import android.content.Intent
 import android.util.Log
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.allephnogueira.cineradar.MovieDetailActivity
+import com.allephnogueira.cineradar.View.DetalhesFilmesActivity
 import com.allephnogueira.cineradar.R
-import com.allephnogueira.cineradar.Service.Event
 import com.bumptech.glide.Glide
 
 
@@ -96,12 +95,17 @@ class Adapter (
             val imageUrl = eventos.images.firstOrNull()?.url ?: "" // Usa uma string vazia se não houver imagem
 
             // Cria uma Intent para abrir a nova Activity
-            val intent = Intent(holder.itemView.context, MovieDetailActivity::class.java)
+            val intent = Intent(holder.itemView.context, DetalhesFilmesActivity::class.java)
             intent.putExtra("EVENT_IMAGE", imageUrl) // Passando a URL da imagem
             intent.putExtra("EVENT_NOME", eventos.title)
             intent.putExtra("EVENT_DATA", dataFormatada)
             intent.putExtra("EVENT_GENERO", eventos.genres.firstOrNull())
-            intent.putExtra("EVENT_SINOPSE", eventos.synopsis)
+            if (eventos.synopsis.isEmpty()) {
+                val filmeSemSinopse = "Desculpe, ainda não temos informação sobre esse filme."
+                intent.putExtra("EVENT_SINOPSE", filmeSemSinopse)
+            }else{
+                intent.putExtra("EVENT_SINOPSE", eventos.synopsis)
+            }
             holder.itemView.context.startActivity(intent)
         }
 

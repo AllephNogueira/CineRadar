@@ -1,4 +1,4 @@
-package com.allephnogueira.cineradar.Service
+package com.allephnogueira.cineradar.Model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

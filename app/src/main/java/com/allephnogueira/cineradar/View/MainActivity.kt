@@ -1,7 +1,7 @@
-package com.allephnogueira.cineradar
+package com.allephnogueira.cineradar.View
 
-import FormatarData
 import android.content.Intent
+import com.allephnogueira.cineradar.ViewModel.FormatarData
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,19 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.allephnogueira.cineradar.Adapter.Adapter
-import com.allephnogueira.cineradar.Service.Event
-import com.allephnogueira.cineradar.Service.EventResponse
-import com.allephnogueira.cineradar.Service.OrdenandoPor
-import com.allephnogueira.cineradar.Service.OrdenandoPor.Companion.exibindoCincoUltimosLancamentos
-import com.allephnogueira.cineradar.Service.RetrofitClient
+import com.allephnogueira.cineradar.ViewModel.Adapter
+import com.allephnogueira.cineradar.ViewModel.Event
+import com.allephnogueira.cineradar.ViewModel.EventResponse
+import com.allephnogueira.cineradar.ViewModel.OrdenandoPor
+import com.allephnogueira.cineradar.ViewModel.OrdenandoPor.Companion.exibindoCincoUltimosLancamentos
+import com.allephnogueira.cineradar.Model.RetrofitClient
+import com.allephnogueira.cineradar.R
 import com.allephnogueira.cineradar.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
-import kotlinx.datetime.LocalDate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
@@ -140,6 +139,29 @@ class MainActivity : AppCompatActivity() {
         /** DATA DO FILME */
 
         generoDoFilme.text = event.genres.firstOrNull()
+
+
+        /**
+         * Quando o usuario clicar no card la em cima, vamos levar ele para uma outra activity
+         * Nessa outra acitivy vamos passar esses dados para ele poder ver a sinopse do filme.
+         * */
+
+        imagemTopo.setOnClickListener {
+            val intent = Intent(this, DetalhesFilmesActivity::class.java)
+            intent.putExtra("EVENT_IMAGE", imageUrl)
+            intent.putExtra("EVENT_NOME", event.title)
+            intent.putExtra("EVENT_DATA", dataFormatada)
+            intent.putExtra("EVENT_GENERO", event.genres.firstOrNull())
+
+            // Verificar sinopse e enviar uma mensagem padrão se não houver
+            val filmeSemSinopse = "Desculpe, ainda não temos informação sobre esse filme."
+            intent.putExtra("EVENT_SINOPSE", if (event.synopsis.isEmpty()) filmeSemSinopse else event.synopsis)
+
+            startActivity(intent)
+        }
+
+
+
     }
 
 
@@ -170,9 +192,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "ID do item clicado foi $itemClicado")
         }
     }
-
-
-
 
 }
 

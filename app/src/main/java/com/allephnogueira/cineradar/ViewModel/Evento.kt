@@ -1,4 +1,4 @@
-package com.allephnogueira.cineradar.Service
+package com.allephnogueira.cineradar.ViewModel
 
 data class EventResponse(
     val items: List<Event>

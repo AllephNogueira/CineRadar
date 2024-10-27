@@ -56,6 +56,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:5.4.0")
 
 
 

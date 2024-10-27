@@ -1,8 +1,6 @@
-package com.allephnogueira.cineradar.Service
+package com.allephnogueira.cineradar.ViewModel
 
 import android.util.Log
-import kotlin.concurrent.timer
-import kotlin.random.Random
 
 class OrdenandoPor {
     /**
