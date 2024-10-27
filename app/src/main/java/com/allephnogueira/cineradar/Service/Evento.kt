@@ -9,9 +9,19 @@ data class Event(
     val title: String,
     val date: String,
     val images: List<Image>,
-    val genres: List<String>
+    val genres: List<String>,
+    val premiereDate: PremiereDate
 )
 
 data class Image(
     val url: String
+)
+
+data class PremiereDate(
+    val localDate: String,
+    val isToday: Boolean,
+    val dayOfWeek: String,
+    val dayAndMonth: String,
+    val hour: String,
+    val year: String
 )
