@@ -45,7 +45,9 @@ class Adapter (
          * No caso aqui ele esta pegando o total da lista.
          */
 
+        Log.d("Adapter", "Quantidade de itens na lista: ${myList.size}")
         return myList.size
+
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -76,7 +78,7 @@ class Adapter (
          */
         val dataLocal = eventos.premiereDate?.localDate ?: "Data não encontrada!"
         val dataFormatada = FormatarData.formatarData(dataLocal)
-        holder.textData.text = dataFormatada //
+        holder.textData.text = dataFormatada
         Log.d("Adapter", "Tipo do retorno da data: $dataFormatada")
 
         /**
@@ -85,11 +87,13 @@ class Adapter (
          *
          */
 
-        holder.itemView.setOnClickListener{retornoDadosDoFilme(eventos.toString())}
+        holder.itemView.setOnClickListener{retornoDadosDoFilme(eventos.id)}
+
+
+
 
 
     }
-
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder (itemView) {

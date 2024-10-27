@@ -1,6 +1,9 @@
 package com.allephnogueira.cineradar
 
+import FormatarData
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,17 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.allephnogueira.cineradar.Adapter.Adapter
 import com.allephnogueira.cineradar.Service.Event
 import com.allephnogueira.cineradar.Service.EventResponse
+import com.allephnogueira.cineradar.Service.OrdenandoPor
+import com.allephnogueira.cineradar.Service.OrdenandoPor.Companion.exibindoCincoUltimosLancamentos
 import com.allephnogueira.cineradar.Service.RetrofitClient
 import com.allephnogueira.cineradar.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
+import kotlinx.datetime.LocalDate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding /** Configuraçao inicial do meu RecyclerView */
+    private lateinit var binding: ActivityMainBinding
+
+    /** Configuraçao inicial do meu RecyclerView */
 
     private lateinit var imagemTopo: ImageView
     private lateinit var nomeFilmeTopo: TextView
@@ -32,7 +41,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater) // **** configuração do binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        /** Configuração do binding. */
         enableEdgeToEdge()
         setContentView(binding.root) //***
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -49,17 +59,39 @@ class MainActivity : AppCompatActivity() {
 
         val api = RetrofitClient.instance
         api.getUpcomingEvents().enqueue(object : Callback<EventResponse> {
+            /**
+             * responde.body() é onde chega o corpo do API com os dados
+             * passamos para events Se vier os dados, vamos fazer um teste antes
+             * let = se o item nao for nulo ele aplica os dados no metodo
+             * cardImagemSuperior(it[10]) vamos deixar um filme no card superior
+             * iniciarRecyclerView é onde vamos iniciar, passando os dados IT como parametro
+             *
+             * Antes de passar para o iniciarRecyclerView vamos ordernar a lista por data.
+             *
+             * Handler vamos repetir de 5 em 5 segundos assim vamos atualizar o card com os ultimos 5 filmes
+             * Caso queira saber mais entrar em OdernandoPor, la o metodo (exibindoCincoUltimosLancamentos) esta explicando melhor
+             */
             override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
                 if (response.isSuccessful) {
-
                     val eventResponse =
-                        response.body() // EventResponse é onde tem os itens que volta do servidor
+                        response.body()
                     val events =
-                        eventResponse?.items // Passamos para dentro de Events os itens, que pode retornar um nulo
-                    events?.let { // LET = aplica essa funçao apenas se o operador events nao for nulo
-                        cardImagemSuperior(it[10]) // aqui é onde vamos passar a imagem do topo.
-                        // IT = valor do evento.
-                        iniciarRecyclerView(it) // Passa a lista de eventos para o recyclerView
+                        eventResponse?.items
+                    events?.let {
+
+                        /** Define o Runnable para atualizar a imagem do filme */
+                        val handler = Handler(Looper.getMainLooper())
+                        val runnable = object : Runnable {
+                            override fun run() {
+                                cardImagemSuperior(exibindoCincoUltimosLancamentos(it))
+                                // Repetir a execução a cada 5 segundos
+                                handler.postDelayed(this, 5000)
+                            }
+                        }
+                        handler.post(runnable)/** Inicia a primeira execução */
+
+
+                        iniciarRecyclerView(OrdenandoPor.ordenandoPorData(it))
                     }
                 } else {
                     Log.e("MainActivity", "Erro: ${response.errorBody()?.string()}")
@@ -73,10 +105,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    private fun viewsParaImagensSuperior(){
+    private fun viewsParaImagensSuperior() {
         /**
          * Aqui vamos passar os dados para a imagem de tela superior.
          *
@@ -93,14 +122,21 @@ class MainActivity : AppCompatActivity() {
          * Aqui vamos exibir um filme na nossa tela superior
          * E vamos tambem adicionar as views
          */
-        nomeFilmeTopo.text = event.title
+
         val imageUrl = event.images.firstOrNull()?.url
         if (!imageUrl.isNullOrEmpty()) {
             Glide.with(this).load(imageUrl).into(imagemTopo)
         }
-        dataFilmeTopo.text = event.date
-        generoDoFilme.text =
-            event.genres.firstOrNull()
+
+        nomeFilmeTopo.text = event.title
+
+        /** Pegando a data do filme  */
+        val dataLocal = event.premiereDate?.localDate ?: "Data não encontrada!"
+        val dataFormatada = FormatarData.formatarData(dataLocal)
+        dataFilmeTopo.text = dataFormatada.toString()
+        /** DATA DO FILME */
+
+        generoDoFilme.text = event.genres.firstOrNull()
     }
 
 
@@ -125,8 +161,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = Adapter(events) { events -> Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show()
-            }
+        binding.recyclerView.adapter = Adapter(events) { events ->
+            Toast.makeText(this, events, Toast.LENGTH_SHORT).show()
+        }
     }
 
 
