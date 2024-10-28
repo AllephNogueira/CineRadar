@@ -3,10 +3,11 @@
 CineRadar é um aplicativo Android que permite aos usuários explorar uma lista de filmes em cartaz e eventos futuros, utilizando dados de uma API. 
 O aplicativo fornece uma interface amigável e recursos como visualização de imagens, sinopses e datas de estreia.
 
-![Tela do CineRadar](https://github.com/AllephNogueira/CineRadar/blob/main/imagens/1screenSplash.jpeg)
-![Tela de  Filmes](https://github.com/AllephNogueira/CineRadar/blob/main/imagens/2screenInicio.jpeg)
-![Tela de Detalhes do Filme](https://github.com/AllephNogueira/CineRadar/blob/main/imagens/3screenSinopse.jpeg)
-
+<p align="center">
+  <img src="https://github.com/AllephNogueira/CineRadar/blob/main/imagens/1screenSplash.jpeg" alt="Tela do CineRadar" width="300" />
+  <img src="https://github.com/AllephNogueira/CineRadar/blob/main/imagens/2screenInicio.jpeg" alt="Tela de Filmes" width="300" />
+  <img src="https://github.com/AllephNogueira/CineRadar/blob/main/imagens/3screenSinopse.jpeg" alt="Tela de Detalhes do Filme" width="300" />
+</p>
 
 
 
