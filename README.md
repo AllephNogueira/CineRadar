@@ -3,6 +3,9 @@
 CineRadar é um aplicativo Android que permite aos usuários explorar uma lista de filmes em cartaz e eventos futuros, utilizando dados de uma API. 
 O aplicativo fornece uma interface amigável e recursos como visualização de imagens, sinopses e datas de estreia.
 
+![Tela do CineRadar](imagens/1screenSplash.jpg)
+![Tela de  Filmes](imagens/2screenInicio.jpg)
+![Tela de Detalhes do Filme](imagens/3screenSinopse.jpg)
 
 
 
@@ -22,6 +25,9 @@ O aplicativo fornece uma interface amigável e recursos como visualização de i
 - **Retrofit**: Biblioteca para consumo de APIs.
 - **Glide**: Biblioteca para carregamento de imagens.
 - **Android Jetpack**: Conjunto de bibliotecas para facilitar o desenvolvimento.
+- **MVVM**: Model - View - ViewModel
+- **Logs**
+- **Testes automatizado** 
 
 ## Pré-requisitos
 
