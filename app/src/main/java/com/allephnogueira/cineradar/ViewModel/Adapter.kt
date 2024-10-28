@@ -74,6 +74,17 @@ class Adapter (
         holder.textName.text = eventos.title
         holder.textGenero.text = eventos.genres.firstOrNull()
 
+
+        /**
+         * Aqui vamos verificar se os itens estao em pré venda, se estiver eles vao retornar um verdadeiro e vamos ativar o card.
+         * */
+        if (eventos.inPreSale) {
+            holder.prevenda.visibility = View.VISIBLE
+        }else {
+            holder.prevenda.visibility = View.GONE
+        }
+        Log.d("Adapter", "Informação que esta chegando nos itens de Pré venda ${eventos.inPreSale}")
+
         /**
          * Formatando a data para exibir.
          */
@@ -131,6 +142,7 @@ class Adapter (
         val textName : TextView = itemView.findViewById(R.id.textCardFilme)
         val textGenero : TextView = itemView.findViewById(R.id.textCardFilmeGenero)
         val textData : TextView = itemView.findViewById(R.id.textCardFilmeData)
+        val prevenda : TextView = itemView.findViewById(R.id.textPreVenda)
 
     }
 }

@@ -68,4 +68,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCardFilmeGenero"
         app:srcCompat="@android:drawable/dialog_holo_dark_frame" />
+
+    <TextView
+        android:id="@+id/textPreVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FD0808"
+        android:contentDescription="Imagem que informa se tem pre venda"
+        android:drawableEnd="@drawable/ic_fire_24"
+        android:fontFamily="sans-serif-condensed-light"
+        android:paddingLeft="8dp"
+        android:text="PRÉ-VENDA"
+        android:textColor="@color/CorLetras"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFilmeCard"
+        app:layout_constraintEnd_toEndOf="@+id/imageFilmeCard"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="@+id/imageFilmeCard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

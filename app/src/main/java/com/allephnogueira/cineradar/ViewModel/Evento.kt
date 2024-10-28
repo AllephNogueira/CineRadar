@@ -9,6 +9,7 @@ data class Event(
     val title: String,
     val date: String,
     val synopsis: String,
+    val inPreSale: Boolean,
     val images: List<Image>,
     val genres: List<String>,
     val premiereDate: PremiereDate
