@@ -13,7 +13,7 @@ O aplicativo fornece uma interface amigável e recursos como visualização de i
 
 ## Funcionalidades
 
-- Exibe uma lista de filmes em cartaz.
+- Exibe uma lista de filmes que vão entrar cartaz.
 - Mostra eventos futuros relacionados ao cinema.
 - Ordena os eventos por data antes da exibição.
 - Carrega imagens dos filmes utilizando a biblioteca Glide.
