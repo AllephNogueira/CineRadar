@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.allephnogueira.cineradar.R
 import com.bumptech.glide.Glide
 
-class SplashAcitivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
